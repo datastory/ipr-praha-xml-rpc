@@ -18,6 +18,7 @@ import xmlrpc.client
 import argparse
 from lxml import etree
 from lxml import objectify
+from lxml.etree import tostring
 
 
 PROXY = 'http://app.urm.cz/ws/RPC2UTF8/'
@@ -54,6 +55,18 @@ class Proxy:
         """
 
         response = objectify.fromstring(self.proxy.getschema(self.token).encode("utf-8"))
+
+        print("Stored queries:\n")
+        for query in response.storedqueries.query:
+            print ("%s: %s" % (query.attrib['id'], query.qdescription.text))
+            try:
+                for param in query.qparam:
+                    print("\t%s: %s" % (param.attrib['id'], param.qpdescription))
+            except:
+                pass
+
+        print("\n----\nTables:\n")
+
         for schema in response.tables.userschema:
 
             print("%s: %s" % ('Schema', schema.attrib['name']))
@@ -61,17 +74,38 @@ class Proxy:
             for table in schema.table:
                 print("\t- %s" % (table.attrib['name']))
 
-    def get_data(self, schema, table):
+    def get_stored_queries(self, query, attrib=None, value=None):
         """Get data from table
         """
 
-        response = objectify.fromstring(self.proxy.getschema(self.token).encode("utf-8"))
-        for schema in response.tables.userschema:
+        request = objectify.Element("request")
+        params = objectify.SubElement(request, "params")
+        if attrib:
+            param = objectify.SubElement(params, "param")
+            parid = objectify.SubElement(param, "parid")
+            parval = objectify.SubElement(param, "content")
+            parid = attrib
+            parval = value
 
-            print("%s: %s" % ('Schema', schema.attrib['name']))
+        request = '<?xml version="1.0" encoding="UTF-8"?> \
+            <request>\
+            <params>\
+            </params>\
+            </request>'
 
-            for table in schema.table:
-                print("\t- %s" % (table.attrib['name']))
+        print(request, query)
+        response = objectify.fromstring(
+            self.proxy.getstoredqueryresult(self.token, query, 10000, 0, request, False).encode("utf-8"))
+
+        #response = objectify.fromstring(self.proxy.getschema(self.token).encode("utf-8"))
+        #response = objectify.fromstring(
+        #    self.proxy.getstoredqueryr(token, 21, 1000, 0, xmlparams, False)
+        #for schema in response.tables.userschema:
+
+        #    print("%s: %s" % ('Schema', schema.attrib['name']))
+
+        #    for table in schema.table:
+        #        print("\t- %s" % (table.attrib['name']))
 
 
 
@@ -95,6 +129,12 @@ def main():
                         help='Schema name')
     parser.add_argument('--table', dest='table',
                         help='Table name')
+    parser.add_argument('--query', dest='query',
+                        help='Stored query id')
+    parser.add_argument('--attribute', dest='attribute',
+                        help='Stored query attribute')
+    parser.add_argument('--value', dest='value',
+                        help='Stored query value')
 
     args = parser.parse_args()
 
@@ -106,11 +146,13 @@ def main():
 
         if args.list:
             proxy.list_datasets()
+        elif args.query:
+            proxy.get_stored_queries(args.query, args.attribute, args.value)
 
-        elif args.schema and\
-            args.table:
-            print(proxy.get_data(
-                args.schema, args.table))
+        #elif args.schema and\
+        #    args.table:
+        #    print(proxy.get_data(
+        #        args.schema, args.table))
 
 
         proxy.unconnect()
