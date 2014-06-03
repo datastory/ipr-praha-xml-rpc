@@ -19,6 +19,7 @@ import argparse
 from lxml import etree
 from lxml import objectify
 from lxml.etree import tostring
+from prettytable import PrettyTable
 
 
 PROXY = 'http://app.urm.cz/ws/RPC2UTF8/'
@@ -93,10 +94,20 @@ class Proxy:
             </params>\
             </request>'
 
-        print(request, query)
         response = objectify.fromstring(
-            self.proxy.getstoredqueryresult(self.token, query, 10000, 0, request, False).encode("utf-8"))
+            self.proxy.getstoredqueryresult(self.token, query, 1000, 0, request, False).encode("utf-8"))
 
+        table_head = []
+        for col in response.query.cols.col:
+            table_head.append(col.name)
+        table = PrettyTable(table_head)
+
+        for row in response.rows.r:
+            row_data = []
+            for col in row.c:
+                row_data.append(col.text)
+            table.add_row(row_data)
+        print(table)
         #response = objectify.fromstring(self.proxy.getschema(self.token).encode("utf-8"))
         #response = objectify.fromstring(
         #    self.proxy.getstoredqueryr(token, 21, 1000, 0, xmlparams, False)
@@ -114,7 +125,11 @@ def main():
     """Main method parses arguments
     """
 
-    parser = argparse.ArgumentParser(description='IPR database connector')
+    parser = argparse.ArgumentParser(description='IPR database connector',
+                                     epilog="""Example usage: |
+                                     connector.py --l # print list of available queries |
+                                     connector.py --query=21 # print result from pre-stored query nr.21
+                                     """)
     parser.add_argument('--url', dest='url',
                         help='URL of the proxy', default=PROXY)
     parser.add_argument('--user', dest='user',
