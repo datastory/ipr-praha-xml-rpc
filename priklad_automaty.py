@@ -31,13 +31,13 @@ with open('./automaty.csv', 'w', newline='') as out:
     writer.writerow(['x', 'y', 'hodiny', 'tarif_kc_h', 'tarif_eur', 'typ', 'poznamka'])
     
     for automat in root[1]:
-        x = child[0].text
-        y = child[1].text
-        hodiny = child[2].text
-        tarif_kc_h = child[3].text
-        tarif_eur = child[4].text
-        typ = child[5].text
-        poznamka = child[6].text
+        x = automat[0].text
+        y = automat[1].text
+        hodiny = automat[2].text
+        tarif_kc_h = automat[3].text
+        tarif_eur = automat[4].text
+        typ = automat[5].text
+        poznamka = automat[6].text
     
         writer.writerow([x, y, hodiny, tarif_kc_h, tarif_eur, typ, poznamka])
 
