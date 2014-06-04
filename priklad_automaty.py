@@ -15,7 +15,7 @@ token = proxy.authenticate('anonymous@ipr.praha.eu', '294de3557d9d00b3d2d8a1e6aa
 #print(proxy.getschema(token))
 
 #stahne sadu z ulozeneho dotazu c. 21 (automaty), viz. getschema -> storedqueries a vyexportuje ji do csv
-#souradnicovy system S-JTSK
+#souradnicovy system S-JTSK (Greenwich) / Krovak East North (EPSG: 102067)
 xmlparams = '<?xml version="1.0" encoding="UTF-8"?> \
 <request>\
 <params>\
@@ -31,11 +31,11 @@ with open('./automaty.csv', 'w', newline='') as out:
     writer.writerow(['x', 'y', 'hodiny', 'tarif_kc_h', 'tarif_eur', 'typ', 'poznamka'])
     
     for automat in root[1]:
-        x = automat[0].text
-        y = automat[1].text
+        x = automat[0].text.replace(',','.')
+        y = automat[1].text.replace(',','.')
         hodiny = automat[2].text
-        tarif_kc_h = automat[3].text
-        tarif_eur = automat[4].text
+        tarif_kc_h = automat[3].text.replace(',','.')
+        tarif_eur = automat[4].text.replace(',','.')
         typ = automat[5].text
         poznamka = automat[6].text
     
