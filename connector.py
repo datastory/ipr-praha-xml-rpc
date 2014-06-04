@@ -79,14 +79,14 @@ class Proxy:
         """Get data from table
         """
 
-        request = objectify.Element("request")
-        params = objectify.SubElement(request, "params")
-        if attrib:
-            param = objectify.SubElement(params, "param")
-            parid = objectify.SubElement(param, "parid")
-            parval = objectify.SubElement(param, "content")
-            parid = attrib
-            parval = value
+        #request = objectify.Element("request")
+        #params = objectify.SubElement(request, "params")
+        #if attrib:
+        #    param = objectify.SubElement(params, "param")
+        #    parid = objectify.SubElement(param, "parid")
+        #    parval = objectify.SubElement(param, "content")
+        #    parid = attrib
+        #    parval = value
 
         request = '<?xml version="1.0" encoding="UTF-8"?> \
             <request>\
@@ -117,6 +117,12 @@ class Proxy:
 
         #    for table in schema.table:
         #        print("\t- %s" % (table.attrib['name']))
+
+    def get_xml(self, xml):
+        print(
+            objectify.fromstring(
+            self.proxy.getcomposedqueryresult(self.token, open(xml).read(), False).encode("utf-8"))
+        )
 
 
 
@@ -150,6 +156,8 @@ def main():
                         help='Stored query attribute')
     parser.add_argument('--value', dest='value',
                         help='Stored query value')
+    parser.add_argument('--xml', dest='xml',
+                        help='Input XML request')
 
     args = parser.parse_args()
 
@@ -163,6 +171,8 @@ def main():
             proxy.list_datasets()
         elif args.query:
             proxy.get_stored_queries(args.query, args.attribute, args.value)
+        elif args.xml:
+            proxy.get_xml(args.xml)
 
         #elif args.schema and\
         #    args.table:
