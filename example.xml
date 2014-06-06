@@ -1,0 +1,59 @@
+<request>
+<numrows>500</numrows>
+<offset>1000</offset>
+<cols>
+<c>
+<name>nejakynazevsloupce1</name>
+<code>schemaname1.tablename1.columnname1</code>
+<function>DISTINCT</function>
+</c>
+<c>
+<name>nejakynazevsloupce2</name>
+<code>schemaname2.tablename2.columnname2</code>
+<function>SUM</function>
+</c>
+<c>
+<name>nejakynazevsloupce3</name>
+<code>schemaname2.tablename2.columnname3</code>
+</c>
+</cols>
+<tables>
+<table name="schemaname1.tablename1" />
+<table name="schemaname2.tablename2" />
+</tables>
+<joins>
+<join joinedtable="APP_UP.FVU"  left="PUP_CUR.PVP_FVU_P.KODFP1_A"
+right="APP_UP.FVU.KODFP" type="LEFT" />
+</joins>
+<groupby>
+<gb column="nejakynazevsloupce1" />
+<gb column="nejakynazevsloupce2" />
+</groupby>
+<orderby>
+<ob column="nejakynazevsloupce1" />
+<ob column="nejakynazevsloupce2" />
+</orderby>
+<where><![CDATA[
+schemaname1.tablename2.columnname4>##PARAM1## ANDschemaname2.tablename2.columnname7=##PARAM2##
+]]></where>
+<having><![CDATA[
+nejakynazevsloupce2 > ##PARAM3##
+]]></having>
+    <params>
+ <param>
+ <parid>1</parid>
+ <partype>NUMERIC</partype>
+ <content>100</content>
+ </param>
+ <param>
+ <parid>2</parid>
+ <partype>VARCHAR</partype>
+ <content>somevalue</content>
+ </param>
+<param>
+ <parid>3</parid>
+ <partype>NUMERIC</partype>
+ <content>500</content>
+ </param>
+    </params>
+</request>
