@@ -1,0 +1,34 @@
+<request>
+  <numrows>10</numrows>
+  <offset>0</offset>
+  <cols>
+    <c>
+      <name>ID</name>
+      <code>APP_LOKALITY_V1.LOKALITY_NAVRH_P.ID</code>
+    </c>
+    <c>
+      <name>SHAPE</name>
+      <code>sde.st_geometry_to_gml(APP_LOKALITY_V1.LOKALITY_NAVRH_P.SHAPE)</code>
+    </c>
+  </cols>
+  <tables>
+    <table name="APP_LOKALITY_V1.LOKALITY_NAVRH_P"/>
+  </tables>
+  <joins/>
+  <groupby/>
+  <orderby>
+    <ob column="ID"/>
+  </orderby>
+  <where>
+    <![CDATA[ 1 = ##PARAM1## ]]>
+  </where>
+  <having/>
+  <params>
+    <param>
+      <parid>1</parid>
+      <partype>NUMERIC</partype>
+      <description>Param1</description>
+      <content>1</content>
+    </param>
+  </params>
+</request>
