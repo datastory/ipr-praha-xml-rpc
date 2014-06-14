@@ -8,8 +8,8 @@ import xml.etree.ElementTree as ET
 import csv
 
 proxy = xmlrpc.client.ServerProxy('http://app.urm.cz/ws/RPC2UTF8/') 
-#ziska token pro uzivatele anonymous@ipr.praha.eu, heslo 'anonymous' (MD5)
-token = proxy.authenticate('anonymous@ipr.praha.eu', '294de3557d9d00b3d2d8a1e6aab028cf')
+#ziska token pro uzivatele hackathon@ipr.praha.eu, heslo 'hackathon' (MD5)
+token = proxy.authenticate('hackathon@ipr.praha.eu', 'c1d43a1b8cfa81c6b26fa036e328af0b')
 
 #vypise schema dostupnych datovych sad v XML
 #print(proxy.getschema(token))
