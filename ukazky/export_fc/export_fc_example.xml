@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request>
+	<numrows>500</numrows>
+	<offset>0</offset>
+	<cols>
+		<c>
+			<name>OBJECTID</name>
+			<code>DOP_CUR.DOP_ZPS_AUTOMATY_B.OBJECTID</code>
+		</c>
+		<c>
+			<name>TYP</name>
+			<code>DOP_CUR.DOP_ZPS_AUTOMATY_B.TYP</code>
+		</c>
+		<c>
+			<name>SHAPE_TXT</name>
+			<code>sde.st_astext(DOP_CUR.DOP_ZPS_AUTOMATY_B.SHAPE)</code>
+		</c>
+
+	</cols>
+	<tables>
+		<table name="DOP_CUR.DOP_ZPS_AUTOMATY_B" />
+	</tables>
+	<joins/>
+	<groupby/>
+	<orderby>
+		<ob column="OBJECTID" />
+	</orderby>
+	<where><![CDATA[
+1 = ##PARAM1##
+	]]></where>
+	<having/>
+	<params>
+		<param>
+			<parid>1</parid>
+			<partype>NUMERIC</partype>
+			<description>Param1</description>
+			<content>1</content>
+		</param>
+	</params>
+</request>

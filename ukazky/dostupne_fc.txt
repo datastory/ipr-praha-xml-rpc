@@ -1,0 +1,31 @@
+DMP_CUR.PARCELAKN_DOKM_P - parcely Digitální katastrální mapy a Digitálního obrazu katastrální mapy
+DOP_CUR.DOP_PID_LINKY_L - linky PID
+DOP_CUR.DOP_PID_ZASTAVKY_B - zastávky PID
+DOP_CUR.DOP_Cyklotrasy_l - cyklistické trasy
+DOP_CUR.DOP_ZPS_Stani_l - stání v zónách placeného stání
+DOP_CUR.DOP_ZPS_Automaty_b - parkovací automaty
+DOP_CUR.DOP_ZachParkoviste_b - záchytná parkovištì P+R
+FSV_CUR.FSV_Knihovny_b - knihovny
+FSV_CUR.FSV_SkolyZS_b - školy
+FSV_CUR.FSV_VerejnaWC_b - veøejné toalety
+HM_CUR.HM_Ekola_den_p - hluková mapa - den
+HM_CUR.HM_Ekola_noc_p - hluková mapa - noc
+HM_CUR.HM_hlukochr_bariery_l - protihlukové bariéry
+HM_CUR.HM_hlukochr_opernezdi_l - opìrné zdi
+HM_CUR.HM_hlukochr_valy_p - protihlukové valy 
+MAP.MAP_MestskeCasti_p - mìstské èásti
+MAP.MAP_vrstevnice_5m_l - vrtsvenice 5 m
+MAP.MAP_VOLEB_OKRSKY_P - volební okrsky 
+MAP.MAP_SKP_Bloky25_p - soubor kartografických prezentací DMP - bloky
+OPK_CUR.OPK_PamStromy_b - památné stromy
+OPK_CUR.OPK_PrirodniParky_p - pøírodní parky
+OPK_CUR.OPK_USES_p - územní systém ekologické stability
+OVZ_CUR.OVZ_Atem_NO2_IHr_p - imisní pole prùmìrných roèních koncentrací NO2
+OVZ_CUR.OVZ_Atem_PM10_IHr_p - imisní pole prùmìrných roèních koncentrací PM10
+PUP_CUR.PVP_fvu_p - plán využití ploch - funkèní plochy
+RUIAN_CUR.RUIAN_AdresniMisto_b - adresní místo RÚIAN
+RUIAN_CUR.RUIAN_Ulice_l - ulice RÚIAN
+SED_CUR.SED_CenovaMapa_p - cenová mapa Hl. m. Prahy
+URK_CUR.URK_ValHrobPietMist_b - pietní místa a váleèné hroby
+URK_CUR.URK_PlochyShodVyuz_p - souèasný stav využití území
+ZPK_CUR.ZPK_O_SberOdpadu_b - odpadní zaøízení pro obèany

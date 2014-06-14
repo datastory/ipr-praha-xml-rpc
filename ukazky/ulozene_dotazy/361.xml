@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request>
+	<query name="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>PARCELA</name>
+				<code>DMP_CUR.PARCELAKN_DOKM_P.PARCELA</code>
+			</c>
+			<c>
+				<name>PARCELA_CENTROID</name>
+				<code>sde.st_astext(sde.st_geometry(##PARAM1##,2))</code>
+			</c>
+			<c>
+				<name>KATASTR_KOD</name>
+				<code>DMP_CUR.PARCELAKN_DOKM_P.KATUZE_KOD</code>
+			</c>
+			<c>
+				<name>KATASTR_NAZEV</name>
+				<code>MAP.MAP_KATASTRALNIUZEMI_P.NAZEV</code>
+			</c>
+			<c>
+				<name>KN_PAR_ID</name>
+				<code>DMP_CUR.PARCELAKN_DOKM_P.KN_PAR_ID</code>
+			</c>
+			<c>
+				<name>PARCELA_SHAPE</name>
+				<code>sde.st_astext(DMP_CUR.PARCELAKN_DOKM_P.SHAPE)</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="DMP_CUR.PARCELAKN_DOKM_P" />
+			<table name="MAP.MAP_KATASTRALNIUZEMI_P" />
+		</tables>
+		<joins/>
+		<groupby/>
+		<orderby/>
+		<where><![CDATA[
+		sde.st_intersects(DMP_CUR.PARCELAKN_DOKM_P.SHAPE,sde.st_pointfromtext(##PARAM1##,2))=1
+		and MAP.MAP_KATASTRALNIUZEMI_P.KATUZE_KOD=DMP_CUR.PARCELAKN_DOKM_P.KATUZE_KOD
+		]]></where>
+		<having/>
+		<params>
+			<param>
+				<parid>1</parid>
+				<description>point</description>
+				<partype>CLOB</partype>
+				<content>POINT(-728426.22020000 -1044468.02980000)</content>
+			</param>
+		</params>
+	</query>
+	<query name="cen2000" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_00.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_00.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_00.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_00" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_00.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2001" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_01.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_01.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_01.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_01" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_01.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2002" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_02.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_02.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_02.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_02" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_02.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2003" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_03.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_03.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_03.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_03" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_03.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2004" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_04.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_04.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_04.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_04" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_04.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2005" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_05.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_05.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_05.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_05" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_05.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2006" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_06.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_06.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_06.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_06" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_06.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2007" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_07.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_07.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_07.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_07" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_07.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2008" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_08.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_08.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_08.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_08" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_08.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2009" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_09.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_09.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_09.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_09" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_09.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2010" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_10.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_10.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_10.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_10" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_10.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2011" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_11.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_11.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_11.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_11" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_11.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2012" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_12.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_12.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_12.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_12" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_12.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2013" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_13.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_13.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_GEN.SED_CENOVAMAPA_P_13.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_GEN.SED_CENOVAMAPA_P_13" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_GEN.SED_CENOVAMAPA_P_13.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="cen2014" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>CENA</name>
+				<code>SED_CUR.SED_CENOVAMAPA_P.CENA</code>
+			</c>
+			<c>
+				<name>MAPOVY_LIST</name>
+				<code>SED_CUR.SED_CENOVAMAPA_P.MAPA</code>
+			</c>
+			<c>
+				<name>KOD</name>
+				<code>SED_CUR.SED_CENOVAMAPA_P.KOD</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="SED_CUR.SED_CENOVAMAPA_P" />
+		</tables>
+		<joins />
+		<groupby />
+		<orderby />
+		<where><![CDATA[
+		sde.st_intersects(SED_CUR.SED_CENOVAMAPA_P.SHAPE,sde.st_geomfromtext(##PARAM2##,2))=1
+		]]></where>
+		<having />
+		<params>
+			<param>
+				<parid>2</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_CENTROID</pivot>
+			</param>
+		</params>
+	</query>
+	<query name="adresa" sub-of="main" showsql="true">
+		<numrows>500</numrows>
+		<offset>0</offset>
+		<cols>
+			<c>
+				<name>ADRESA</name>
+				<code>MAP.V_MAP_ADRESY_RB_B.ADRESA</code>
+			</c>
+		</cols>
+		<tables>
+			<table name="MAP.V_MAP_ADRESY_RB_B" />
+		</tables>
+		<joins/>
+		<groupby/>
+		<orderby/>
+		<where><![CDATA[
+	MAP.V_MAP_ADRESY_RB_B.IDADRESA IN (SELECT MAP.MAP_ADRESY_RB_B.IDADRESA FROM MAP.MAP_ADRESY_RB_B WHERE SDE.ST_INTERSECTS(MAP.MAP_ADRESY_RB_B.SHAPE,SDE.ST_GEOMFROMTEXT(##PARAM3##,2))=1)
+		]]></where>
+		<having/>
+		<params>
+			<param>
+				<parid>3</parid>
+				<description>SHAPE - pivot z prvni tabulky</description>
+				<partype>CLOB</partype>
+				<pivot>PARCELA_SHAPE</pivot>
+			</param>
+		</params>
+	</query>
+</request>

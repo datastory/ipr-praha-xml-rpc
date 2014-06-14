@@ -23,8 +23,8 @@ from prettytable import PrettyTable
 
 
 PROXY = 'http://app.urm.cz/ws/RPC2UTF8/'
-USER = 'anonymous@ipr.praha.eu',
-PASSWORD = '294de3557d9d00b3d2d8a1e6aab028cf'
+USER = 'hackathon@ipr.praha.eu',
+PASSWORD = 'c1d43a1b8cfa81c6b26fa036e328af0b'
 
 class Proxy:
     """Simple class managing connection to database

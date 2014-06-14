@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request>
+	<numrows>500</numrows>
+	<offset>0</offset>
+	<cols>
+		<c>
+			<name>IDADRESA</name>
+			<code>MAP.V_MAP_ADRESY_RB_B.IDADRESA</code>
+		</c>
+		<c>
+			<name>ADRESA</name>
+			<code>MAP.V_MAP_ADRESY_RB_B.ADRESA</code>
+		</c>
+	</cols>
+	<tables>
+		<table name="MAP.V_MAP_ADRESY_RB_B" />
+	</tables>
+	<joins/>
+	<groupby/>
+	<orderby>
+		<ob column="ADRESA" />
+	</orderby>
+	<where><![CDATA[
+	MAP.V_MAP_ADRESY_RB_B.IDADRESA in (select * from table(UFC_ADRESA_FULLTEXT(##PARAM1##,##PARAM2##,##PARAM3##)))]]></where>
+	<having/>
+	<params>
+		<param>
+			<parid>1</parid>
+			<partype>varchar</partype>
+			<description>Adresa</description>
+			<content>biskupcova</content>
+		</param>
+		<param>
+			<parid>2</parid>
+			<partype>varchar</partype>
+			<description>cpop</description>
+			<content>1762</content>
+		</param>
+		<param>
+			<parid>3</parid>
+			<partype>varchar</partype>
+			<description>cor</description>
+			<content>78</content>
+		</param>
+	</params>
+</request>

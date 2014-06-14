@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request>
+	<numrows>0</numrows>
+	<offset>0</offset>
+	<cols>
+		<c>
+			<name>ADRESA</name>
+			<code>MAP.V_MAP_ADRESY_RB_B.ADRESA</code>
+		</c>
+	</cols>
+	<tables>
+		<table name="MAP.V_MAP_ADRESY_RB_B" />
+	</tables>
+	<joins/>
+	<groupby/>
+	<orderby/>
+	<where><![CDATA[
+IDADRESA IN (SELECT IDADRESA FROM MAP.MAP_ADRESY_RB_B WHERE SDE.ST_INTERSECTS(SHAPE,SDE.ST_GEOMFROMTEXT(##PARAM1##,2))=1)
+	]]></where>
+	<having/>
+	<params>
+		<param>
+			<parid>1</parid>
+			<partype>CLOB</partype>
+			<description>Definice polygonu ve formatu POLYGON (( souradnice1, souradnice2, souradniceX));
+                            prvni parametr pro funkci st_polyfromtext</description>
+			<content>POLYGON (( -742238.65 -1044825.05, -742263.85 -1044825.05, -742263.85 -1044856.379, -742238.65 -1044856.379, -742238.65 -1044825.05))</content>
+		</param>
+	</params>
+</request>
